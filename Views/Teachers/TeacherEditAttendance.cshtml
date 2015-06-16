@@ -1,0 +1,80 @@
+﻿@{
+    ViewBag.Title = "TeacherEditAttendance";
+    Layout = "~/Views/Shared/_Teacher.cshtml";
+}
+@using AdeelAhmadSEM560.Models;
+
+@*============Middle Div about Mark Attendance *@
+
+<div class="col-sm-4" style="margin:0px; padding:0px">
+
+    @{String date = "";}
+
+    <form action="/Teachers/TeacherEditAttendanceNow?teacherId=@date" method="post">
+   
+        <div class="col-lg-12" style="margin:0px; padding:0px">
+            <h3 class="col-lg-6 pull-left" style="font-family:Georgia; color:#31708f"><b>Edit For</b></h3>
+            <h3 class="col-lg-6 pull-right" style="padding-right:34px">
+                <input type="date" name="date" value="@ViewBag.Date" required style="height:30px; width:165px" class="btn btn-info pull-right"/>
+            </h3>
+        </div>
+        
+        <div class="col-sm-11" style="margin:0px; padding:0px">
+
+            <div class="col-sm-12 panel panel-info" style="margin:0px 0px 0px 8px">
+         
+                <table class="table" >
+            
+                    <tr style="background-color:#d9edf7">
+                        <td style="text-align:center; color:#31708f"><b>Student ID</b></td>
+                        <td style="text-align:center; color:#31708f"><b>Student Name</b></td>
+                        <td style="text-align:center; color:#31708f"><b>@ViewBag.Date</b></td>
+                    </tr>
+
+                    
+                    @foreach (User s in ViewBag.Students)
+                    {
+                        if(s.type != "admin" && s.type != "teacher")
+                        {
+                            foreach (Attendance a in ViewBag.Attendance)
+                            {
+                                date = a.date;
+
+                                if (s.userId == a.studentId)
+                                {
+                                    if (a.presents == "P")
+                                    { 
+                                        <tr>
+                                            <td style="text-align:center">@s.userId</td>
+                                            <td style="text-align:center">@s.name</td>
+                                            <td style="text-align:center">
+                                                <input type="checkbox" checked name="@s.userId"/>
+                                            </td>
+
+                                        </tr>
+                                        break;
+                                    }
+                                    else
+                                    {
+                                        <tr>
+                                            <td style="text-align:center">@s.userId</td>
+                                            <td style="text-align:center">@s.name</td>
+                                            <td style="text-align:center">
+                                            <input type="checkbox" name="@s.userId"/>
+                                            </td>
+                                        </tr>
+                                        break;
+                                    }           
+                                }
+                            }
+                        }
+                    }
+                </table>
+        </div>
+            <br/>
+            <div class="col-sm-12" style="padding-top:10px; margin-left:7px">
+                <input type="submit" value="Submit Attendance" class="btn btn-danger" />
+            </div>
+        </div>
+    </form>
+</div>

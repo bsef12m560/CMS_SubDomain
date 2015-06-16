@@ -1,0 +1,123 @@
+﻿@{
+    ViewBag.Title = "TeacherMarkAttendance";
+    Layout = "~/Views/Shared/_Teacher.cshtml";
+}
+
+@using AdeelAhmadSEM560.Models;
+
+@*============Middle Div about Mark Attendance *@
+<div class="col-sm-9" style="margin:0px; padding:0px">
+
+    <div class="panel panel-info" style="margin:25px 8px 0px 8px">
+                
+        <div class="panel-heading">
+            <span><b>Attendance</b></span>
+        </div>
+                
+        <div class="panel-body">
+
+
+<div class="col-sm-6" style="margin:0px; padding:0px">
+
+    <form action="/Teachers/TeacherMarkAttendanceNow?teacherId=@Session["teacherId"]" method="post">
+   
+        <div class="col-lg-12" style="margin:0px; padding:0px">
+            <h3 class="col-lg-6 pull-left" style="font-family:Georgia; color:#31708f"><b>Select Date</b></h3>
+            <h3 class="col-lg-5 pull-right" style="margin-right:4%">
+                <input type="date" name="date" required style="height:30px; width:150px" class="btn btn-info pull-right"/>
+            </h3>
+        </div>
+        
+        <div class="col-sm-11" style="margin:0px; padding:0px">
+
+            <div class="col-sm-12 panel panel-info" style="margin:0px 0px 0px 8px">
+         
+                <table class="table" >
+            
+                    <tr style="background-color:#d9edf7">
+                        <td style="text-align:center; color:#31708f"><b>Student ID</b></td>
+                        <td style="text-align:center; color:#31708f"><b>Student Name</b></td>
+                        <td style="text-align:center; color:#31708f"><b>Mark</b></td>
+                    </tr>
+
+                    @foreach(User s in Model)
+                    {
+                        if(s.type != "admin" && s.type != "teacher")
+                        {
+                            <tr>
+                                <td style="text-align:center">@s.userId</td>
+                                <td style="text-align:center">@s.name</td>
+                                <td style="text-align:center">
+                                    <input type="checkbox" name="@s.userId"/>
+                                </td>
+
+                            </tr>
+                        }
+                    }
+                </table>
+        </div>
+            <br/>
+            <div class="col-sm-12" style="padding-top:10px; margin-left:7px">
+                <input type="submit" value="Submit Attendance" class="btn btn-danger" />
+            </div>
+        </div>
+    </form>
+</div>
+
+@for (int i = 0; i < ViewBag.CountDate && i < 4; i++ )
+{
+    <div style="width:105px; float:left; margin-top:60px; padding:0px">
+
+        
+        <div class="col-sm-11" style="margin:0px; padding:0px">
+
+            <div class="col-sm-12 panel panel-info" style="margin:0px 0px 0px 8px">
+         
+                <table class="table" >
+            
+                    @{int j = 0;
+                    String date = "";}
+
+                    @foreach (String s in ViewBag.UniqueDate)
+                    {
+                        if (j == i)
+                        {
+                            date = s;
+                            <tr style="background-color:#d9edf7">
+                                <td style="height:37px; text-align:center; color:#31708f"><b>@date</b></td>
+                            </tr>
+                        }
+                        j++;
+                    }
+
+                    @foreach(User s in Model)
+                    {
+                        if(s.type != "admin" && s.type != "teacher")
+                        {
+                            foreach (Attendance a in ViewBag.Attendance)
+                            {
+                                if (s.userId == a.studentId && a.date == date)
+                                {
+                                    <tr>
+                                        <td style="height:39px; text-align:center">@a.presents</td>
+                                    </tr>
+                                    break;  
+                                }
+                            }
+                            
+                        }
+                    }
+                </table>
+        </div>
+            <br/>
+            <form action="/Teachers/TeacherEditAttendance?date=@date" method="post">
+                <div class="col-sm-12" style="padding-top:10px; width:100%; margin-left:7px">
+                    <input type="submit" value="Edit" class="col-sm-12 btn btn-danger pull-right" />
+                </div>
+            </form>
+        </div>
+</div>
+}
+        </div>
+    </div>
+</div>

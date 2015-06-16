@@ -1,0 +1,96 @@
+﻿@{
+    ViewBag.Title = "AdminAddTeacher";
+    Layout = "~/Views/Shared/_Admin.cshtml";
+}
+
+@*============Middle Div about Update Profile *@
+
+<div class="col-sm-5" style="margin:0px; padding:0px">
+
+    <div class="panel panel-danger" style="margin:25px 8px 0px 8px">
+                
+        <div class="panel-heading">
+            <span><b>Add New Teacher</b></span>
+        </div>
+                
+        <div class="panel-body">
+            <br/>
+        <form action="/Admin/AdminAddTeacherNow" class="form-horizontal" role="form">
+
+            <div class="form-group">
+                <label class="control-label col-sm-3" for="adminName">Name: </label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" name="name" placeholder="Enter Name" required />
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label class="control-label col-sm-3" for="adminID">Teacher ID: </label>
+
+                <div class="input-group" style="width:47%; float:left">
+                <input type="text" name="userId" id="userId" onchange="" placeholder="Enter ID" required class="form-control" style="width:92%; margin-left:15px" />
+                  
+                <span class="input-group-btn"style="width:7%; margin-left:15px">
+                    <input  type="button" value="Check!" id="check" class="btn btn-default" />
+                </span>
+                
+                </div>
+                <label class="control-label col-sm-3" id="message" style="color:#a94442"></label>
+
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-sm-3" for="phone">Phone: </label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" name="phone" placeholder="Enter Phone Number" required />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div>
+                    <input type="submit" value="Submit" id="submit" class="btn btn-danger" style="margin-left:28.2%; width:43%" />
+                </div>
+            </div>
+
+        </form>
+   </div>
+    </div>
+</div>
+
+@Scripts.Render("~/bundles/jquery")
+<script>
+
+        $(document).ready(function () {
+            //$('#submit').disabled();
+            $('#check').click(function () {   
+                var userId = $('#userId').val();
+
+                //alert('User Name ='+ userId);
+                $.getJSON("/Admin/CheckUserName?userId=" + userId, function (data)
+                {
+                    if (data) {
+                        $('#message').text("Not Available");
+                    }
+                    else {
+                        $('#message').text("Available");
+                    }
+                });
+            });
+        });
+
+@* function go()
+        {
+            var userId = $('#userId').val();
+
+            //alert('User Name ='+ userId);
+            $.getJSON("/Admin/CheckUserName?userId=" + userId, function (data) {
+                if (data) {
+                    $('#message').text("Not Available");
+                }
+                else {
+                    $('#message').text("Available");
+                }
+            });
+        }
+*@
+</script>

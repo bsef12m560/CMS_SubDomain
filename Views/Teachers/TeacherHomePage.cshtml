@@ -1,0 +1,33 @@
+﻿@{
+    ViewBag.Title = "TeacherHomePage";
+    Layout = "~/Views/Shared/_Teacher.cshtml";
+}
+
+@*============Middle Div about Teacher *@
+
+@using AdeelAhmadSEM560.Models;
+
+<div class="col-sm-5" style="margin:0px; padding:0px">
+
+    <div class="panel panel-info" style="margin:25px 8px 0px 8px">
+                
+        <div class="panel-heading">
+            <span><b>General Information</b></span>
+        </div>
+                
+        <div class="panel-body">
+
+            <h3 class="col-sm-8"><b>Total Assignments:</b></h3>
+            <h3 class="col-sm-2">@ViewBag.Assignments</h3>
+
+            <h3 class="col-sm-8"><b>Submitted Assignments:</b></h3>
+            <h3 class="col-sm-2">@ViewBag.SubmittedAssignments</h3>
+
+            <h3 class="col-sm-8"><b>Total Students:</b></h3>
+            <h3 class="col-sm-2">@ViewBag.Students</h3>
+
+            <h3 class="col-sm-8"><b>Total Messages:</b></h3>
+            <h3 class="col-sm-2">@ViewBag.Messages</h3>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,122 @@
+﻿
+@{
+    ViewBag.Title = "StudentAssignments";
+    Layout = "~/Views/Shared/_Student.cshtml";
+}
+
+@using AdeelAhmadSEM560.Models;
+
+@*============Middle Div about Drop Subject *@
+
+<div class="col-sm-5" style="margin:0px; padding:0px">
+
+@*    <div>
+        <h3 style="font-family:Georgia; margin-left:8px"><b>Assignment</b></h3>
+    </div>
+*@
+    <div class="panel panel-success" style="margin:25px 8px 0px 8px">
+ 
+        <div class="panel-heading">
+            <span>Assignments</span>
+        </div>
+    
+        <table class="table" >
+           @{
+               List<Assignment> done = new List<Assignment>();
+
+               foreach (Assignment s in ViewBag.Assignments)
+            {
+                foreach (SubmittedAssignment r in ViewBag.SubmittedAssignments)                                   
+                {
+                    if (s.assignmentNo == r.assignmentNo)
+                    {
+                        done.Add(s);
+                    }
+                }
+            }
+
+               foreach (Assignment s in ViewBag.Assignments)
+            {
+                if(done.Contains(s))
+                {
+                    <tr>
+                        <td style="width:15%">@s.assignmentNo</td>
+                        <td style="width:65%">@s.assignmentName</td>
+                        <td style="width:16%; padding-right:0px; padding-left:0px; text-align:right">
+                            @{String no = @s.assignmentNo;}
+                                <a href="@("/Students/StudentDownloadAssignment?assignmentNo=" + @no)">
+                                    <input type="submit" value="Download" style="border:none; border-radius:3px; color:white;font-weight:600" class="btn-info"/>
+                                </a>
+                        </td>
+                        <td style="padding-right:0px; text-align:left">
+                            <input disabled type="submit" value="Uploaded" style="margin-right:35px; border:none; border-radius:3px; color:white;font-weight:600; width:70%" class="btn-success"/>
+                        </td>
+                    </tr>                            
+                }
+                else
+                {
+                 <tr>
+                    <td style="width:15%">@s.assignmentNo</td>
+                    <td style="width:65%">@s.assignmentName</td>
+                    <td style="width:16%;padding-right:0px; padding-left:0px; text-align:right">
+                        @{String no = @s.assignmentNo;}
+                        <a href="@("/Students/StudentDownloadAssignment?assignmentNo=" + @no)">
+                            <input type="submit" value="Download" style="border:none; border-radius:3px; color:white;font-weight:600" class="btn-info"/>
+                        </a>
+@*                        <form action="/Students/StudentDownloadAssignment/@no">
+                            <input type="submit" value="Download" style="border:none; border-radius:3px; color:white;font-weight:600" class="btn-info"/>
+                        </form>
+*@
+                    </td>
+                    <td style="text-align:left">
+                        <a href="@("/Students/StudentUploadAssignment?assignmentNo=" + @no)">
+                            <input type="submit" value="Upload" style="margin-right:35px; border:none; border-radius:3px; color:white;font-weight:600; width:76%" class="btn-warning"/>
+                        </a>
+                    </td>
+                </tr>
+                }
+            }
+                            
+            }
+@*    
+            @foreach (Assignment all in Model)
+            {
+                foreach (String uploaded in ViewBag.SubmittedAssignments)
+                {
+                    if(all.assignmentNo == uploaded)
+                    {
+                        <tr>
+                            <td style="width:65%">@all.assignmentName</td>
+                            <td style="width:16%; padding-right:0px; padding-left:0px; text-align:right">
+                                <form action="/Students/StudentDropSubjectsNow/@all.subjectCode">
+                                    <input type="submit" value="Download" style="border:none; border-radius:3px; color:white;font-weight:600" class="btn-info"/>
+                                </form>
+                            </td>
+                            <td style="padding-right:0px; text-align:left">
+                                <input disabled type="submit" value="Uploaded" style="margin-right:35px; border:none; border-radius:3px; color:white;font-weight:600; width:70%" class="btn-success"/>
+                            </td>
+                        </tr>
+                    }
+                    else
+                    {
+                        <tr>
+                            <td style="width:65%">@all.assignmentName</td>
+                            <td style="width:16%;padding-right:0px; padding-left:0px; text-align:right">
+                                <form action="/Students/StudentDropSubjectsNow">
+                                    <input type="submit" value="Download" style="border:none; border-radius:3px; color:white;font-weight:600" class="btn-info"/>
+                                </form>
+                            </td>
+                            <td style="text-align:left">
+                                <form action="/Students/StudentUploadAssignment/@all.subjectCode">
+                                    <input type="submit" value="Upload" style="margin-right:35px; border:none; border-radius:3px; color:white;font-weight:600; width:76%" class="btn-warning"/>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                }
+            }
+*@
+        </table>
+    </div>
+
+</div>

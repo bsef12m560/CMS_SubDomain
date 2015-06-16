@@ -1,0 +1,52 @@
+﻿@{
+    ViewBag.Title = "TeacherUpdateProfile";
+    Layout = "~/Views/Shared/_Teacher.cshtml";
+}
+
+@using AdeelAhmadSEM560.Models;
+
+@*============Middle Div about Update Profile *@
+
+<div class="col-sm-5" style="margin:0px; padding:0px">
+
+    <div class="panel panel-info" style="margin:25px 8px 0px 8px">
+                
+        <div class="panel-heading">
+            <span><b>Update Profile</b></span>
+        </div>
+                
+        <div class="panel-body">
+            <br/>
+        <form action="/Teachers/TeacherUpdateProfileNow/@Session["teacherId"]" class="form-horizontal" role="form">
+
+            <div class="form-group">
+                <label class="control-label col-sm-3" for="teacherName">Name: </label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" name="teacherName" placeholder="@Model.name" required />
+                </div>
+            </div>
+                                
+            <div class="form-group">
+                <label class="control-label col-sm-3" for="teacherAddress">Address: </label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" name="teacherAddress" placeholder="@Model.address" required />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-sm-3" for="phone">Phone: </label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" name="phone" placeholder="@Model.phone" required />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div>
+                    <input type="submit" value="Submit" class="btn btn-danger" style="margin-left:28.2%; width:43%" />
+                </div>
+            </div>
+
+        </form>
+   </div>
+    </div>
+</div>

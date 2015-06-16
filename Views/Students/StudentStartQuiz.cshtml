@@ -1,0 +1,55 @@
+﻿@{
+    ViewBag.Title = "StudentStartQuiz";
+    Layout = "~/Views/Shared/_Student.cshtml";
+}
+
+@using AdeelAhmadSEM560.Models;
+
+@*============Middle Div about Start Quiz *@
+        
+<div class="col-sm-6" style="height:675px; overflow:auto; margin:0px; padding:0px">
+    <div>
+        <br/>
+        <ul style="list-style:none; padding-left:16px">
+            <li> <b>Course: &nbsp;</b>@ViewBag.SubjectName</li>
+            <li> <b>Instructor: &nbsp;</b>@ViewBag.TeacherName</li>
+        </ul>
+    </div>
+
+    <div class="panel panel-success" style="margin:8px 8px 8px 8px">
+                
+        <div class="panel-heading">
+            <span style="margin-left:44%"><b>@Session["quiz_No"]</b></span>
+        </div>
+                
+        <div class="panel-body" style="padding:0px">
+
+        <form action="../Students/StudentSubmitQuiz" class="form-horizontal" role="form">
+
+            @{
+                int i = 1;
+                foreach (Quizze q in Model)
+                {
+                 <div class="panel panel-warning" style="margin:2px">
+                    <div class="panel-body">
+                        <p><b><u>Question @i</u></b></p>
+                        <p style="font-family:Arial">@q.questions</p>
+                        <input type="radio" name="@("option"+ i)" value="@q.optionA" required style="float:left"/><p class="col-sm-5">@q.optionA</p>
+                        <input type="radio" name="@("option"+ i)" value="@q.optionB" style="float:left"/><p class="col-sm-5">@q.optionB</p>
+                        <br/><br/>
+                        <input type="radio" name="@("option"+ i)" value="@q.optionC" style="float:left"/><p class="col-sm-5">@q.optionC</p>
+                        <input type="radio" name="@("option"+ i)" value="@q.optionD" style="float:left"/><p class="col-sm-5">@q.optionD</p>
+                    </div>
+                </div>
+                    i++;
+                }                
+            }
+
+            <div>
+                <input type="submit" value="Submit Quiz" class="btn btn-danger" style="margin-left:28%; margin-top:5px; margin-bottom:5px; width:44.2%" />
+            </div>
+        
+        </form>    
+        </div>
+    </div>
+</div>

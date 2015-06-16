@@ -1,0 +1,79 @@
+﻿@{
+    ViewBag.Title = "TeacherDetailsStudent";
+    Layout = "~/Views/Shared/_Teacher.cshtml";
+}
+
+@using AdeelAhmadSEM560.Models;
+
+@*============Middle Div about Grade Book *@
+        
+<div class="col-sm-5" style="margin:0px; padding:0px">
+    <div>
+        <br/>
+        <ul style="list-style:none; padding-left:16px">
+            <li> <b>Student: &nbsp;</b> @ViewBag.studentName</li>
+            <li> <b>Course: &nbsp;</b>@ViewBag.subjectName</li>
+            <li> <b>Instructor: &nbsp;</b>@ViewBag.teacherName</li>
+        </ul>
+    </div>
+
+    <div class="panel panel-info" style="margin:8px 8px 0px 8px">
+ 
+        <table class="table">
+            
+            <tr style="background-color:#d9edf7">
+                <td style="text-align:center"><b>Title</b></td>
+                <td style="text-align:center"><b>Total Marks</b></td>
+                <td style="text-align:center"><b>Obtained Marks</b></td>
+                <td style="text-align:center"><b>%age</b></td>
+            </tr>
+    
+            @{
+                double total = 1;
+                double obtained = 0;
+                double percentage = 0;
+                String grade = "";
+                
+                foreach(Result r in Model)
+                {
+                    total = total + Int32.Parse(r.totalMarks);
+                    obtained = obtained + Int32.Parse(r.obtainedMarks);
+
+                    float o = Int32.Parse(r.obtainedMarks);
+                    float t = Int32.Parse(r.totalMarks);
+                    
+                    float p = (o / t) * 100;
+                    
+                    <tr>
+                        <td style="text-align:center">@r.quizNo</td>
+                        <td style="text-align:center">@r.totalMarks</td>
+                        <td style="text-align:center">@r.obtainedMarks</td>
+                        <td style="text-align:center">@p %</td>
+                    </tr>
+                }
+
+                percentage = (obtained / total) * 100;
+
+                if (percentage >= 85)
+                    { grade = "A"; }
+                else if (percentage < 85 && percentage >= 80)
+                    {grade = "B";}
+                else if (percentage < 80 && percentage >= 75)
+                    {grade = "C";}
+                else if (percentage < 75 && percentage >= 70)
+                    {grade = "D";}
+                else if (percentage < 70 && percentage >= 65)
+                    {grade = "E";}
+                else
+                    {grade = "F";}
+                }
+
+            <tr style="background-color:#d9edf7">
+                <td colspan="2" style="text-align:left"><b>Total Marks / Grade</b></td>
+                <td colspan="2" style="text-align:right"><b>@obtained / @grade</b></td>
+            </tr>
+
+        </table>
+    </div>
+
+</div>

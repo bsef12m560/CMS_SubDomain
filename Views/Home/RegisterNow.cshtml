@@ -1,0 +1,212 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>RegisterNow | Adeel Ahmad BSEF12M560</title>
+    
+    <Link href="~/Content/bootstrap.css" rel="stylesheet">
+
+</head>
+<body>
+    <div class="col-sm-12 table-bordered" style="margin:1px; padding-bottom:5px" >
+        
+        <div>
+            <img src="~/Pics/CompleteBanner.jpg" style="margin-left:6%" />
+        </div>
+        
+        <div class="well-sm col-sm-13 div-border" style="height:25px; background-color:#003366"></div>
+
+        <div class="col-sm-7" style="margin-left:20%; padding:0px">
+        
+            <br/>
+            <div class="">
+                <h3 style="margin-left:9.2%; font-weight:500 "><b>Create New Account</b></h3>
+                <hr style="margin-left:9%; width:80%"/>
+            </div>
+    
+            <div>
+                @{Html.BeginForm("RegisterUser", "Home", FormMethod.Post, new { target = "_blank", @class = "form-horizontal" });}
+                    <div class="form-group">
+                        @Html.Label("Name: ", new { @class = "control-label col-lg-4" } )
+                        <div class="col-lg-5">
+                            <input type="text" class="form-control" name="name" placeholder="Enter Name" required />
+                        </div>
+                    </div>
+            
+                    <div class="form-group" style="margin-bottom:0px">
+                        @Html.Label("Student ID: ", new { @class = "control-label col-lg-4" } )                        
+                        <div class="col-lg-5 input-group" style="padding-left:15px; padding-right:15px; float:left">
+                            <input type="text" class="form-control" name="userId" id="userId" onchange="check()" placeholder="Enter ID" required />
+                  
+                            <span class="input-group-btn">
+                                <input  type="button" value="Check!" id="check" class="btn btn-default" />
+                            </span>
+                        </div>
+@*                        
+                        @Html.Label("", new {id="message", style="padding-top:6px; color:#a94442", @class = "col-sm-3" } )
+*@
+                        <label class="col-sm-3" id="message" style="padding-top:6px; color:#a94442"></label>
+                    </div>
+
+                    <div class="col-sm-5 col-lg-offset-4">
+                        <label class="" id="Length" style="padding-bottom:5px; margin:0px; color:#a94442"></label>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-lg-4" for="password">Password:</label>
+                        <div class="col-lg-5">
+                            <input type="password" class="form-control" name="password" placeholder="Enter Password" required/>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-lg-4" for="address" >Address:</label>
+                        <div class="col-lg-5">
+                            <input type="text" class="form-control" name="address" placeholder="Enter Address"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-lg-4" for="phone" >Phone:</label>
+                        <div class="col-lg-5">
+                            <input type="text" class="form-control" name="phone" placeholder="Enter Phone Number"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-lg-4" for="gender">Gender:</label>
+                        <div class="col-lg-2">
+                        <label class="control-label col-lg-7" for="gender">Male:</label>
+                            <input style="margin-top:10px" type="radio" name="gender" value="male" class="btn btn-primary" required/>
+                        </div>
+                        <div class="col-lg-2">
+                            <label class="control-label col-lg-9" for="gender">Female:</label>
+                            <input style="margin-top:10px" type="radio" name="gender" value="female" class="btn btn-primary"/>
+                        </div>
+                    </div>
+            
+                    <div class="form-group">
+                        <label class="col-lg-4 control-label">Date of Birth: </label>
+                        <div class="col-lg-1" style="width:10%; padding-right:3px">
+                            <select class="form-control input-sm" name="day">
+                                <option>&nbsp;-Day-</option>
+                                @for (int i = 1; i <= 31; i++)
+                                { 
+                                    <option value="@i">@i</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="col-lg-1" style="width:10%; padding:0px 3px 0px 3px">
+                            <select class="form-control input-sm" name="month">
+                                <option value="0">&nbsp;-Month-</option>
+                                <option value="Jan">Jan</option>
+                                <option value="Feb">Feb</option>
+                                <option value="Mar">Mar</option>
+                                <option value="Apr">Apr</option>
+                                <option value="May">May</option>
+                                <option value="Jun">Jun</option>
+                                <option value="Jul">Jul</option>
+                                <option value="Aug">Aug</option>
+                                <option value="Sep">Sep</option>
+                                <option value="Oct">Oct</option>
+                                <option value="Nov">Nov</option>
+                                <option value="Dec">Dec</option>
+                            </select>
+                        </div>
+                        <div class="col-lg-1" style="width:10%; padding:0px 3px 0px 3px">
+                            <select class="form-control input-sm" name="year">
+                                <option>&nbsp;-Year-</option>
+                                @for (int i = 2015; i >= 1975; i--)
+                                { 
+                                    <option value="@i">@i</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-sm-offset-4 col-lg-10">
+                            <div class="checkbox">
+                                <label><input type="checkbox" name="aggrement" required /> I agree that all the information and privacy<br/>
+                                    can be used by the site in case of need.</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-lg-offset-4 col-lg-10">
+                            <input type="submit" value="Submit" id="done" disabled class="btn btn-danger col-sm-2" />
+                        </div>
+                    </div>
+                @{Html.EndForm();}
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+@Scripts.Render("~/bundles/jquery")
+<script>
+
+        $(document).ready(function () {
+
+            $('#check').click(function () {
+
+                var userId = $('#userId').val();
+
+                //alert('User Name ='+ userId);
+                $.getJSON("../Admin/CheckUserName?userId=" + userId, function (data) {
+                    if (data) {
+                        $('#done').attr('disabled', true);
+                        $('#message').text("Not Available");
+                    }
+                    else {
+                        if ($('userId').val > 10)
+                        {
+                            $('#done').removeAttr('disabled');
+                            $('#message').text("Available");
+                        }
+                    }
+                });
+
+            });
+            
+            
+            $('#userId').change(function () {
+               
+            var userId = $('#userId').val();
+            
+            if (userId.length < 10) {
+                $('#done').attr('disabled', true);
+                $('#Length').text("At least 10 characters required!");
+                if ($('#Length').text = "At least 10 characters")
+                {
+                    $('#message').text("");
+                }
+            }
+            else
+            {
+                $('#Length').text("");
+                $.getJSON("/Admin/CheckUserName?userId=" + userId, function (data) {
+                    if (data || $('userId').val == "") {
+                        $('#done').attr('disabled', true);
+                        $('#message').text("Not Available");
+                    }
+                    else {
+                        $('#done').removeAttr('disabled');
+                        $('#message').text("Available");
+                    }
+                });
+            }
+
+
+
+            });
+
+        });
+</script>

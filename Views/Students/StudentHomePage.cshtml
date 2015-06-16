@@ -1,0 +1,49 @@
+﻿@{
+    ViewBag.Title = "StudentHomePage";
+    Layout = "~/Views/Shared/_Student.cshtml";
+}
+
+@using AdeelAhmadSEM560.Models;
+
+@*============Middle Div about Cources *@
+        
+<div class="col-sm-4" style="margin:0px 0px 0px 8px; padding:0px">
+            
+    <div>
+        <h3 style="font-family:Georgia">Classroom Portal Page</h3>
+    </div>
+
+    <div class="panel panel-success" >
+                
+        <div class="panel-heading">
+            <span><b>Courses Enrolled</b></span>
+        </div>
+                
+        <div class="panel-body">
+
+            @foreach(SelectedSubject s in Model)
+            {
+                foreach(AvailableSubject a in ViewBag.subjectNames)
+                {
+                    if(s.subjectCode == a.subjectCode)
+                    {
+                        <h4><u>@a.subjectName</u></h4>
+                        <h5 style="margin-left:10px"><a href="@("/Students/StudentGradeBook?code=" + @s.subjectCode)">Grade Book</a></h5>
+                        <h5 style="margin-left:10px"><a href="@("/Students/StudentSelectQuiz?code=" + @s.subjectCode)">Start Quiz</a></h5>
+                        <h5 style="margin-left:10px"><a href="@("/Students/StudentAssignments?code=" + @s.subjectCode)">Assignments</a></h5>
+                        
+                        @*<h4>
+                            <u>@a.subjectName</u>
+                        </h4>
+                        <ul style="color:maroon">
+                            <li><a href="../Students/StudentGradeBook/@s.subjectCode">Grade Book</a></li>
+                            <li><a href="../Students/StudentStartQuiz/@s.subjectCode">Start Quiz</a></li>
+                            <li><a href="../Students/StudentAssignments/@s.subjectCode">Assignments</a></li>
+                        </ul>*@
+                    }
+                }
+            }
+
+        </div>
+    </div>
+</div>

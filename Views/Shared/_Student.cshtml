@@ -1,0 +1,138 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+    <Link href="~/Content/bootstrap.css" rel="stylesheet">
+    <Script src="~/Script/bootstrap.js"></Script>
+</head>
+
+@using AdeelAhmadSEM560.Models;
+
+<body>
+    <div class="col-sm-12 table-bordered" style="margin:1px; padding-bottom:5px" >
+        
+        <div>
+            <img src="~/Pics/CompleteBanner.jpg" style="margin-left:6%" />
+        </div>
+        
+        <div class="well-sm col-sm-13 div-border">
+            <form action="/Students/StudentHomePage">
+                <input type="submit" value="Home" class="btn btn-danger col-sm-2"/>
+            </form>
+            <form action="/Home/UnderDevelopment">
+                <input type="submit" value="FAQs" class="btn btn-danger col-sm-2"/>
+            </form>
+            <input type="date" value="Calendar" style="height:34px" class="btn btn-danger col-sm-2"/>
+            <form action="/Home/UnderDevelopment">
+                <input type="submit" value="Help Desk" class="btn btn-danger col-sm-2"/>
+            </form>
+            <form action="/Students/StudentMessage">
+                <input type="submit" value="Message" class="btn btn-danger col-sm-2"/>
+            </form>
+            <form action="/Home/AdeelVersion">
+                <input type="submit" value="About Us" class="btn btn-danger col-sm-2"/>
+            </form>
+        </div>
+
+        @*============Left Div about Information *@
+
+        <div class="col-sm-3"  style="margin:0px; padding:0px; /*height:786px;*/ border-right:1px solid #003366">
+            
+            <div class="panel panel-success" style="margin:8px 8px 0px 8px">
+                <div class="panel-heading">
+                    <span>Welcome!</span>
+                </div>
+                <div class="panel-body">
+                    <p>@Session["studentName"]</p>
+                    <p><a href="/Students/StudentLogOut"><span class="glyphicon glyphicon-off">&nbsp;Logout</span></a></p>
+                </div>
+            </div>
+
+            <div class="panel panel-success" style="margin:8px 8px 0px 8px">
+                <div class="panel-heading">
+                    <span>Account Management</span>
+                </div>
+                <div class="panel-body">
+                    <p><a href="/Students/StudentChangePassword">Change Password</a></p>
+                    <p><a href="/Students/StudentUpdateProfile/@Session["studentId"]">Update Profile</a></p>
+                </div>
+            </div>
+            <div class="panel panel-success" style="margin:8px 8px 0px 8px">
+                <div class="panel-heading">
+                    <span>Result</span>
+                </div>
+                <div class="panel-body">
+                    <p><a href="/Home/UnderDevelopment">View Transcript</a></p>
+                </div>
+            </div>
+            
+            <div class="panel panel-success" style="margin:8px 8px 0px 8px">
+                <div class="panel-heading">
+                    <span>Add / Drop</span>
+                </div>
+                <div class="panel-body">
+                    <p><a href="/Students/StudentAddSubject">Add Subject</a></p>
+                    <p><a href="/Students/StudentDropSubject/@Session["studentId"]">Drop Subject</a></p>
+                    <p><a href="/Students/StudentWithdrawSubject/@Session["studentId"]">Withdraw Subject</a></p>
+                </div>
+            </div>
+            <div class="panel panel-success" style="margin:8px 8px 0px 8px">
+                <div class="panel-heading">
+                    <span>Accounts</span>
+                </div>
+                <div class="panel-body">
+                    <p><a href="/Home/UnderDevelopment">Challan Form</a></p>
+                </div>
+            </div>
+        </div>
+
+
+
+        @RenderBody()
+    
+
+
+        @*============Right Div about Announcements *@
+
+        <div class="col-sm-3" style="float:right">
+            <div class="panel panel-warning" style="margin:55px 8px 0px 8px">
+                <div class="panel-heading">
+                    <span>Announcements</span>
+                </div>
+                <div class="panel-body">
+                    <p>Opportunities to play a role as a teacher.<br/>
+                        If you are interested then send a message to admin at 
+                        <a href="/Students/StudentSendMessage">adeelahmad560</a>
+                    </p>
+                </div>
+                @if (Session["Like"] == null)
+                { 
+                    <div class="" style="width:189px; float:right; margin:140px 0px 0px 8px">
+                        <img src="~/Pics/1.gif" style="float:right; margin-right:10px; margin-bottom:20px" />
+                        <a href="/Students/StudentLike" style="margin-left:34%;"class="btn btn-info col-sm-7"><strong>Like</strong></a>
+                        <a href="/Students/StudentAllLikes" style="margin-left:34%;"class="col-sm-7">View all likes</a>
+                    </div>
+                }
+                else
+                {
+                    <div class="" style="width:189px; float:right; margin:140px 0px 0px 8px">
+                        <img src="~/Pics/1.gif" style=" float:right; margin-right:10px; margin-bottom:20px" />
+                        <a href="#" style="margin-left:34%;"class="btn btn-success col-sm-7"><strong>Liked</strong></a>
+                        <a href="/Students/StudentAllLikes" style="margin-left:34%;"class="col-sm-7">View all likes</a>
+                    </div>
+                }
+            </div>
+        </div>
+
+
+</div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

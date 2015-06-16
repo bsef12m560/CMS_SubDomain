@@ -1,0 +1,96 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+    <Link href="~/Content/bootstrap.css" rel="stylesheet">
+    <Script src="~/Script/bootstrap.js"></Script>
+</head>
+
+@using AdeelAhmadSEM560.Models;
+
+<body>
+    <div class="col-sm-12 table-bordered" style="margin:1px; padding-bottom:5px" >
+        
+        <div>
+            <img src="~/Pics/CompleteBanner.jpg" style="margin-left:6%" />
+        </div>
+        
+        <div class="well-sm col-sm-13 div-border">
+            <form action="/Teachers/TeacherHomePage">
+                <input type="submit" value="Home" class="btn btn-danger col-sm-2"/>
+            </form>
+            <form action="/Home/UnderDevelopment">
+                <input type="submit" value="FAQs" class="btn btn-danger col-sm-2"/>
+            </form>
+            <input type="date" value="Calendar" style="height:34px" class="btn btn-danger col-sm-2"/>
+             <form action="/Home/UnderDevelopment">
+                <input type="submit" value="Help Desk" class="btn btn-danger col-sm-2"/>
+            </form>
+            <form action="/Teachers/TeacherMessage">
+                <input type="submit" value="Message" class="btn btn-danger col-sm-2"/>
+            </form><form action="/Home/AdeelVersion">
+                <input type="submit" value="About Us" class="btn btn-danger col-sm-2"/>
+            </form>
+        </div>
+
+        @*============Left Div about Information *@
+
+        <div class="col-sm-3"  style="margin:0px; padding:0px; /*height:786px;*/ border-right:1px solid #003366">
+            
+            <div class="panel panel-info" style="margin:8px 8px 0px 8px">
+                <div class="panel-heading">
+                    <span>Welcome!</span>
+                </div>
+                <div class="panel-body">
+                    <p>@Session["teacherName"]</p>
+                    <p><a href="/Teachers/TeacherLogOut"><span class="glyphicon glyphicon-off">&nbsp;Logout</span></a></p>
+                </div>
+            </div>
+
+            <div class="panel panel-info" style="margin:8px 8px 0px 8px">
+                <div class="panel-heading">
+                    <span>Account Management</span>
+                </div>
+                <div class="panel-body">
+                    <p><a href="/Teachers/TeacherChangePassword">Change Password</a></p>
+                    <p><a href="/Teachers/TeacherUpdateProfile/@Session["teacherId"]">Update Profile</a></p>
+                </div>
+            </div>
+                  
+            <div class="panel panel-info" style="margin:8px 8px 0px 8px">
+                <div class="panel-heading">
+                    <span>ADD / Remove</span>
+                </div>
+                <div class="panel-body">
+                    <p><a href="/Teachers/TeacherAddQuiz">Add Quiz</a></p>
+                    <p><a href="/Teachers/TeacherAddAssignment">Add Assignment</a></p>
+                    <p><a href="/Teachers/TeacherMarkAttendance/@Session["teacherId"]">Mark Attendance</a></p>
+                </div>
+            </div>
+                  
+            <div class="panel panel-info" style="margin:8px 8px 0px 8px">
+                <div class="panel-heading">
+                    <span>Result</span>
+                </div>
+                <div class="panel-body">
+                    <p><a href="/Teachers/TeacherViewAllStudents/@Session["teacherId"]">View All Students</a></p>
+                    <p><a href="/Teachers/TeacherViewAllStudentResults/@Session["teacherId"]">View Student Results</a></p>
+                </div>
+            </div>
+
+        </div>
+        
+        @RenderBody()
+    
+    </div>
+    
+    @Scripts.Render("~/bundles/jquery")
+    @RenderSection("scripts", required: false)
+
+</body>
+</html>

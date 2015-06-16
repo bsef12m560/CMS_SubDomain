@@ -1,0 +1,78 @@
+﻿@{
+    ViewBag.Title = "StudentMessage";
+    Layout = "~/Views/Shared/_Student.cshtml";
+}
+@*============Middle Div about Messages*@
+
+@using AdeelAhmadSEM560.Models;
+
+<div class="col-sm-6" style="height:675px; overflow:auto; margin:0px; padding:0px">
+
+    <br/>
+    <div class="form-group col-sm-12">
+        <label class="control-label col-lg-4" style="margin-top:8px; color:#204d74">Send New Message: </label>
+        <div class="col-lg-8">
+            <form action="/Students/StudentSendMessage" class="form-horizontal" role="form">
+                <input type="submit" value="Compose Message" class="btn btn-danger col-lg-5" />
+            </form>
+        </div>
+    </div>
+         
+    <hr style="margin-left:5%; width:90%"/>
+
+
+    @{
+        foreach (Message m in ViewBag.Messages)
+        {
+            foreach (User u in ViewBag.Users)
+            {
+                if(m.sender == u.userId)
+                {
+                    if(u.type == "student")
+                    {
+                        <div class="panel panel-success" style="margin:0px 8px 0px 8px">
+                            <div class="panel-heading">
+                                <span><b>@u.name</b></span>
+                                <span style="float:right; margin-right:40px"><b>@m.date</b></span>
+                            </div>
+                            <div class="panel-body">
+                                <span>@m.messageContent</span>
+                            </div>
+                        </div>
+                        
+                        <br/>
+                    }
+                    else if(u.type == "teacher")
+                    {
+                        <div class="panel panel-info" style="margin:0px 8px 0px 8px">
+                            <div class="panel-heading">
+                                <span><b>@u.name</b></span>
+                                <span style="float:right; margin-right:40px"><b>@m.date</b></span>
+                            </div>
+                            <div class="panel-body">
+                                <span>@m.messageContent</span>
+                            </div>
+                        </div>
+                        
+                        <br/>                    
+                    }
+                    else if(u.type == "admin")
+                    {
+                        <div class="panel panel-danger" style="margin:0px 8px 0px 8px">
+                            <div class="panel-heading">
+                                <span><b>@u.name</b></span>
+                                <span style="float:right; margin-right:40px"><b>@m.date</b></span>
+                            </div>
+                            <div class="panel-body">
+                                <span>@m.messageContent</span>
+                            </div>
+                        </div>
+                        
+                        <br/>
+                    }
+                }
+            }
+        }
+        
+        }
+</div>
