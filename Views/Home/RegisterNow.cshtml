@@ -30,7 +30,7 @@
             </div>
     
             <div>
-                @{Html.BeginForm("RegisterUser", "Home", FormMethod.Post, new { target = "_blank", @class = "form-horizontal" });}
+                @{Html.BeginForm("RegisterUser", "Home", FormMethod.Post, new {@class = "form-horizontal" });}
                     <div class="form-group">
                         @Html.Label("Name: ", new { @class = "control-label col-lg-4" } )
                         <div class="col-lg-5">

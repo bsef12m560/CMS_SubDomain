@@ -33,7 +33,7 @@
                             <td style="text-align:center; width:50%">@a.subjectName</td>
                             <td style="text-align:center">@s.subjectCode</td>
                             <td style="text-align:center">
-                                <form action="/Students/StudentDropSubjectsNow/@s.subjectCode" onsubmit="return confirm()">
+                                <form action="/Students/StudentDropSubjectsNow/@s.subjectCode" onsubmit="return agree()">
                                     <input type="submit" value="Drop" id="drop" style="border:none; border-radius:3px; color:white;font-weight:600" class="btn-warning"/>
                                 </form>
                             </td>
@@ -50,10 +50,13 @@
 
 <script>
 
-    function confirm()
+    function agree()
     {
-        alert("Are you sure?");
-        return true;
+        var x = confirm("Are you sure?");
+        if (x == true)
+            return true;
+        else
+            return false;
     }
     
 </script>

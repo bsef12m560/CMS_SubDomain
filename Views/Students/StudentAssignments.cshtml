@@ -78,44 +78,6 @@
             }
                             
             }
-@*    
-            @foreach (Assignment all in Model)
-            {
-                foreach (String uploaded in ViewBag.SubmittedAssignments)
-                {
-                    if(all.assignmentNo == uploaded)
-                    {
-                        <tr>
-                            <td style="width:65%">@all.assignmentName</td>
-                            <td style="width:16%; padding-right:0px; padding-left:0px; text-align:right">
-                                <form action="/Students/StudentDropSubjectsNow/@all.subjectCode">
-                                    <input type="submit" value="Download" style="border:none; border-radius:3px; color:white;font-weight:600" class="btn-info"/>
-                                </form>
-                            </td>
-                            <td style="padding-right:0px; text-align:left">
-                                <input disabled type="submit" value="Uploaded" style="margin-right:35px; border:none; border-radius:3px; color:white;font-weight:600; width:70%" class="btn-success"/>
-                            </td>
-                        </tr>
-                    }
-                    else
-                    {
-                        <tr>
-                            <td style="width:65%">@all.assignmentName</td>
-                            <td style="width:16%;padding-right:0px; padding-left:0px; text-align:right">
-                                <form action="/Students/StudentDropSubjectsNow">
-                                    <input type="submit" value="Download" style="border:none; border-radius:3px; color:white;font-weight:600" class="btn-info"/>
-                                </form>
-                            </td>
-                            <td style="text-align:left">
-                                <form action="/Students/StudentUploadAssignment/@all.subjectCode">
-                                    <input type="submit" value="Upload" style="margin-right:35px; border:none; border-radius:3px; color:white;font-weight:600; width:76%" class="btn-warning"/>
-                                </form>
-                            </td>
-                        </tr>
-                    }
-                }
-            }
-*@
         </table>
     </div>
 

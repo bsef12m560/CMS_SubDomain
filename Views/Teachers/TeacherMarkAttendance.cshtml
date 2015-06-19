@@ -6,7 +6,7 @@
 @using AdeelAhmadSEM560.Models;
 
 @*============Middle Div about Mark Attendance *@
-<div class="col-sm-9" style="margin:0px; padding:0px">
+<div class="col-sm-9" style="height:585px; overflow:auto; margin:0px; padding:0px">
 
     <div class="panel panel-info" style="margin:25px 8px 0px 8px">
                 
@@ -64,7 +64,7 @@
     </form>
 </div>
 
-@for (int i = 0; i < ViewBag.CountDate && i < 4; i++ )
+@for (int i = 0; i < ViewBag.DateCount && i < 4; i++)
 {
     <div style="width:105px; float:left; margin-top:60px; padding:0px">
 
@@ -76,7 +76,8 @@
                 <table class="table" >
             
                     @{int j = 0;
-                    String date = "";}
+                    String date = "";
+                    int studentCount = ViewBag.StudentCount;}
 
                     @foreach (String s in ViewBag.UniqueDate)
                     {
@@ -101,12 +102,23 @@
                                     <tr>
                                         <td style="height:39px; text-align:center">@a.presents</td>
                                     </tr>
-                                    break;  
+                                    studentCount--;
+                                    break;
                                 }
                             }
                             
                         }
                     }
+
+                    @{
+                        for(int k=1; k<=studentCount; k++)
+                        {
+                            <tr>
+                                <td style="height:39px; text-align:center">--</td>
+                            </tr>
+                        }
+                    }
+
                 </table>
         </div>
             <br/>
