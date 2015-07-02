@@ -153,44 +153,14 @@
 @Scripts.Render("~/bundles/jquery")
 <script>
 
-        $(document).ready(function () {
+    $(document).ready(function () {
 
-            $('#check').click(function () {
+        $('#check').click(function () {
 
-                var userId = $('#userId').val();
-
-                //alert('User Name ='+ userId);
-                $.getJSON("../Admin/CheckUserName?userId=" + userId, function (data) {
-                    if (data) {
-                        $('#done').attr('disabled', true);
-                        $('#message').text("Not Available");
-                    }
-                    else {
-                        if ($('userId').val > 10)
-                        {
-                            $('#done').removeAttr('disabled');
-                            $('#message').text("Available");
-                        }
-                    }
-                });
-
-            });
-            
-            
-            $('#userId').change(function () {
-               
             var userId = $('#userId').val();
-            
-            if (userId.length < 10) {
-                $('#done').attr('disabled', true);
-                $('#Length').text("At least 10 characters required!");
-                if ($('#Length').text = "At least 10 characters")
-                {
-                    $('#message').text("");
-                }
-            }
-            else
-            {
+            var testString = /^[0-9a-zA-Z]{5,15}$/;
+
+            if (userId.match(testString)) {
                 $('#Length').text("");
                 $.getJSON("/Admin/CheckUserName?userId=" + userId, function (data) {
                     if (data || $('userId').val == "") {
@@ -203,10 +173,53 @@
                     }
                 });
             }
+            else {
+                if (userId.length < 5 || userId.length > 15) {
+                    $('#done').attr('disabled', true);
+                    $('#Length').text("At least 5 and atmost 15 characters required!");
+                    $('#message').text("");
+                }
+                else {
+                    $('#done').attr('disabled', true);
+                    $('#Length').text("Only alphabets and digits are allowed!");
+                    $('#message').text("");
+                }
+            }
+        });
 
 
+        $('#userId').change(function () {
 
-            });
+            var userId = $('#userId').val();
+            var testString = /^[0-9a-zA-Z]{5,15}$/;
+
+            if (userId.match(testString)) {
+                $('#Length').text("");
+                $.getJSON("/Admin/CheckUserName?userId=" + userId, function (data) {
+                    if (data || $('userId').val == "") {
+                        $('#done').attr('disabled', true);
+                        $('#message').text("Not Available");
+                    }
+                    else {
+                        $('#done').removeAttr('disabled');
+                        $('#message').text("Available");
+                    }
+                });
+            }
+            else {
+                if (userId.length < 5 || userId.length > 15) {
+                    $('#done').attr('disabled', true);
+                    $('#Length').text("At least 5 and atmost 15 characters required!");
+                    $('#message').text("");
+                }
+                else {
+                    $('#done').attr('disabled', true);
+                    $('#Length').text("Only alphabets and digits are allowed!");
+                    $('#message').text("");
+                }
+            }
 
         });
+
+    });
 </script>
