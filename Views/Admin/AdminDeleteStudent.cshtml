@@ -32,7 +32,7 @@
                         <td style="text-align:center">@s.name</td>
                         <td style="text-align:center">@s.userId</td>
                         <td style="text-align:center">
-                            <form action="/Admin/AdminDeleteStudentNow/@s.userId">
+                            <form action="/Admin/AdminDeleteStudentNow/@s.userId" onsubmit="return agree()">
                                 <input type="submit" value="Delete" style="border:none; border-radius:3px; color:white;font-weight:600" class="btn-warning"/>
                             </form>
                             
@@ -45,3 +45,16 @@
     </div>
 
 </div>
+
+<script>
+
+    function agree()
+    {
+        var x = confirm("Are you sure?");
+        if (x == true)
+            return true;
+        else
+            return false;
+    }
+    
+</script>

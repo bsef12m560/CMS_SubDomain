@@ -32,7 +32,7 @@
                         <td style="text-align:center">@s.name</td>
                         <td style="text-align:center">@s.userId</td>
                         <td style="text-align:center">
-                            <form action="/Admin/AdminDeleteTeacherNow/@s.userId">
+                            <form action="/Admin/AdminDeleteTeacherNow/@s.userId" onsubmit="return agree()">
                                 <input type="submit" value="Delete" id="confirm" style="border:none; border-radius:3px; color:white;font-weight:600" class="btn-warning"/>
                             </form>
                             
@@ -48,15 +48,12 @@
 
 <script>
 
-        $(document).ready(function () {
+    function agree() {
+        var x = confirm("Are you sure?");
+        if (x == true)
+            return true;
+        else
+            return false;
+    }
 
-            $('#confirm').click(function () {
-               
-                var userId = $('#userId').val();
-
-                alert('User Name ='+ userId);
-
-            });
-
-        });
 </script>
